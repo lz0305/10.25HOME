@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            width: 500px;
+            margin: 15px;
+            padding: 10px;
+            color: #666;
+            border: 1px solid #dddddd;
+            background: url("back.jpg") center 500px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                console.log($("#text").val());
+                $.ajax({
+                    url:"http://localhost:3000/home",
+                    type:"POST",
+                    data:{name:$("#text").val()},
+                    success:function (data) {
+                        console.log(data);
+                        var str="";
+                        for(i in data){
+                            var t=data[i];
+                            console.log(t)
+                            for(i in t){
+                                str+="<p>"+t[i].name+"</p>";
+                            }
+                        }
+                        $("#con").html(str)
+                    }
+                })
+            });
+
+        })
+    </script>
+</head>
+<body>
+<input type="text" id="text">
+<input type="submit" id="btn">
+<div id="con">
+
+</div>
+</body>
+</html>
